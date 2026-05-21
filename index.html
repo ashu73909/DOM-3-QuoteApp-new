@@ -1,0 +1,81 @@
+<!-- ----------------------------------------------------------------------- -->
+<!--                   Populating Data From server in this                   -->
+<!-- ----------------------------------------------------------------------- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons (eye icon for password toggle) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="pt-8 pb-10  rounded-xl border-2 border-black " style="transform: translateY(-20%); background-color: oklch(39.1% 0.09 240.876);">
+
+        <div class="flex justify-between gap-20 px-16 py-2  mb-5" style="background-color: rgb(33, 83, 234);">
+            <!--   <input id="" placholder="" value="" type="">  -->
+            <input class="p-2 m-2 rounded-lg bg-blue-500" id="todoInput" type="text" placeholder="Enter your quote here" > 
+            <button class="bg-cyan-400 hover:bg-blue-500 text-white-500 p-2 pb-3 px-8 text-base m-2 rounded-full flex flex-row items-center justify-center font-normal" id="createButton" style="color: rgb(33, 83, 234);;">create</button>
+        </div>
+
+        <div class="mx-auto w-4/5" >
+            <ul id="ulId"></ul>
+        </div>
+        
+        <script>
+            //1.taking button element reference
+            const createButtonref=document.getElementById('createButton');
+
+            //4.creating input reference
+            const todoInputref=document.getElementById('todoInput');
+
+            //6.making ul reference
+            const ulRef=document.getElementById('ulId');
+
+            //10.fetching data from API's
+            (async ()=>{
+                fetch('https://api.freeapi.app/api/v1/public/quotes?page=1&limit=10&query=human',{//we know fetch returns promise<pending>
+                    method:'GET'
+                })
+                .then(response =>response.json()) //JSON => Object ,parsing json response into objects. Object goes to next .then(data)
+                .then((data)=>{
+                    for(const obj of data.data.data){
+                        const li=document.createElement('li');
+                        li.innerText=obj.content;
+                        ulRef.appendChild(li);
+                    }
+                });
+            })();
+
+            //2.for todo app usecase we don't have to remove event listeners so we directly create function
+            //3. creating event listener => on clicking call some function (){}
+            createButtonref.addEventListener('click',function(){
+                const value=todoInputref.value;
+
+                //5.In list for adding new element(to do task) we need new <li></li> tags
+                const li=document.createElement('li');//this creates <li>{ }</li>
+                li.innerText=value;//<li>{ value }</li> , this li tag is hanging alone in DOM ,it's not related or attached to something.
+
+                /*-- -----------------------------------for null <li></li>------------------------------------ --*/
+                
+                //9. on clicking on tasks remove them (when task done scenario)
+                li.addEventListener('click',function(){
+                    li.remove();
+                })
+
+                //7. now ul is list/array
+                ulRef.appendChild(li);
+                
+                //8.The value inside the input box was still their lets remove it after registering task
+                todoInputref.value='';
+                
+            });
+
+        </script>
+    </div>
+</body>
+</html>
