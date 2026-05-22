@@ -18,7 +18,7 @@
 
         <div class="flex justify-between gap-20 px-16 py-2  mb-5" style="background-color: rgb(33, 83, 234);">
             <!--   <input id="" placholder="" value="" type="">  -->
-            <input class="p-2 m-2 rounded-lg bg-blue-500" id="todoInput" type="text" placeholder="Enter your quote here" > 
+            <input class="p-2 m-2 rounded-lg bg-blue-500" id="quoteInput" type="text" placeholder="Enter your quote here" > 
             <button class="bg-cyan-400 hover:bg-blue-500 text-white-500 p-2 pb-3 px-8 text-base m-2 rounded-full flex flex-row items-center justify-center font-normal" id="createButton" style="color: rgb(33, 83, 234);;">create</button>
         </div>
 
@@ -31,7 +31,7 @@
             const createButtonref=document.getElementById('createButton');
 
             //4.creating input reference
-            const todoInputref=document.getElementById('todoInput');
+            const quoteInputref=document.getElementById('quoteInput');
 
             //6.making ul reference
             const ulRef=document.getElementById('ulId');
@@ -54,7 +54,7 @@
             //2.for Quotes app usecase we don't have to remove event listeners so we directly create function
             //3. creating event listener => on clicking call some function (){}
             createButtonref.addEventListener('click',function(){
-                const value=todoInputref.value;
+                const value=quoteInputref.value;
 
                 //5.In list for adding new element(to do task) we need new <li></li> tags
                 const li=document.createElement('li');//this creates <li>{ }</li>
@@ -71,7 +71,7 @@
                 ulRef.appendChild(li);
                 
                 //8.The value inside the input box was still their lets remove it after registering task
-                todoInputref.value='';
+                quoteInputref.value='';
                 
             });
 
