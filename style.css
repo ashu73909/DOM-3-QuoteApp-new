@@ -33,6 +33,7 @@ body{
     flex-direction: row;
     justify-content:center ; /*horizontal*/
     align-items: center; /*vertical*/
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 li{
@@ -51,9 +52,6 @@ li:hover{
 
 
 /* ----------------------------- UI Improvements ----------------------------- */
-body{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
 /* make the main wrapper more card-like and responsive */
 body > div:first-child{
